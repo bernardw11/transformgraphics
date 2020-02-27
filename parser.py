@@ -34,5 +34,15 @@ See the file script for an example of the file format
 """
 def parse_file( fname, points, transform, screen, color ):
     f = open(fname, "r")
-    commands = f.readline()
+    commands = f.readlines()
     print(commands)
+    for x in range(len(commands)):
+        commands[x] = commands[x].rstrip()
+    for x in range(len(commands)):
+        if commands[x] == "line":
+            inputs = commands[x + 1].split(" ")
+            print(inputs)
+            add_edge(points, int(inputs[0]), int(inputs[1]), int(inputs[2]), int(inputs[3]), int(inputs[4]), int(inputs[5]))
+            x ++
+        elif commands[x] == "ident":
+            ident(transform)
