@@ -35,14 +35,55 @@ See the file script for an example of the file format
 def parse_file( fname, points, transform, screen, color ):
     f = open(fname, "r")
     commands = f.readlines()
-    print(commands)
     for x in range(len(commands)):
         commands[x] = commands[x].rstrip()
+    print(commands)
     for x in range(len(commands)):
-        if commands[x] == "line":
+        if commands[x] == "line": #args
+            inputs = commands[x + 1].split(" ")
+            add_edge(points, int(inputs[0]), int(inputs[1]), int(inputs[2]), int(inputs[3]), int(inputs[4]), int(inputs[5]))
+            x += 1
+        elif commands[x] == "ident":
+            print("IDENTITY MATRIX!")
+            ident(transform)
+        elif commands[x] == "scale":  #args
+            inputs = commands[x+1].split(" ")
+            scale = make_scale(int(inputs[0]), int(inputs[1]), int(inputs[2]))
+            matrix_mult(scale, transform)
+            x += 1
+        elif commands[x] == "move":  #args
+            print("yo!")
             inputs = commands[x + 1].split(" ")
             print(inputs)
-            add_edge(points, int(inputs[0]), int(inputs[1]), int(inputs[2]), int(inputs[3]), int(inputs[4]), int(inputs[5]))
-            x ++
-        elif commands[x] == "ident":
-            ident(transform)
+            translate = make_translate(int(inputs[0]), int(inputs[1]), int(inputs[2]))
+            matrix_mult(translate, transform)
+            x += 1
+        elif commands[x] == "rotate":  #args
+            inputs = commands[x + 1].split(" ")
+            if inputs[0] == "x":
+                rotate = make_rotX(int(inputs[1]))
+            elif inputs[0] == "y":
+                rotate = make_rotY(int(inputs[1]))
+            elif inputs[0] == "z":
+                rotate = make_rotZ(int(inputs[1]))
+            matrix_mult(rotate, transform)
+            x += 1
+        elif commands[x] == "apply":
+            print_matrix(points)
+            matrix_mult(transform, points)
+        elif commands[x] == "display":
+            clear_screen(screen)
+            draw_lines(points, screen, color)
+            display(screen)
+        elif commands[x] == "save": #args
+            clear_screen(screen)
+            draw_lines(points, screen, color)
+            name = commands[x + 1]
+            ppm = name[:-4]
+            ppm += ".ppm"
+            print(ppm)
+            #save_ppm(screen, name)
+            #save_ppm_ascii(s, name)
+            #save_extension(s, 'img.png')
+        elif commands[x] == "quit":
+            break

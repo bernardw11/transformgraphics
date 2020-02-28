@@ -18,12 +18,15 @@ def make_scale( x, y, z ):
     return scalematrix
 
 def make_rotX( theta ):
+    theta = math.radians(theta)
     return [[math.cos(theta), -1 * math.sin(theta), 0, 0], [math.sin(theta), math.cos(theta), 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
 
 def make_rotY( theta ):
+    theta = math.radians(theta)
     return [[1, 0, 0, 0], [0, math.cos(theta), -1 * math.sin(theta), 0], [0, math.sin(theta), math.cos(theta), 0], [0, 0, 0, 1]]
 
 def make_rotZ( theta ):
+    theta = math.radians(theta)
     return [[math.cos(theta), 0, math.sin(theta), 0], [0, 1, 0, 0], [-1 * math.sin(theta), 0, math.cos(theta), 0], [0, 0, 0, 1]]
 
 #print the matrix such that it looks like
