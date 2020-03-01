@@ -37,14 +37,12 @@ def parse_file( fname, points, transform, screen, color ):
     commands = f.readlines()
     for x in range(len(commands)):
         commands[x] = commands[x].rstrip()
-    print(commands)
     for x in range(len(commands)):
         if commands[x] == "line": #args
             inputs = commands[x + 1].split(" ")
             add_edge(points, int(inputs[0]), int(inputs[1]), int(inputs[2]), int(inputs[3]), int(inputs[4]), int(inputs[5]))
             x += 1
         elif commands[x] == "ident":
-            print("IDENTITY MATRIX!")
             ident(transform)
         elif commands[x] == "scale":  #args
             inputs = commands[x+1].split(" ")
@@ -64,12 +62,10 @@ def parse_file( fname, points, transform, screen, color ):
                 rotate = make_rotY(int(inputs[1]))
             elif inputs[0] == "z":
                 rotate = make_rotZ(int(inputs[1]))
-            print_matrix(rotate)
             matrix_mult(rotate, transform)
             x += 1
         elif commands[x] == "apply":
             matrix_mult(transform, points)
-            print_matrix(points)
         elif commands[x] == "display":
             clear_screen(screen)
             draw_lines(points, screen, color)
