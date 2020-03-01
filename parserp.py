@@ -75,7 +75,8 @@ def parse_file( fname, points, transform, screen, color ):
             draw_lines(points, screen, color)
             name = commands[x + 1]
             ppm = name[:-4]
-            save_ppm(screen, ppm + ".ppm")
-            save_extension(screen, ppm + ".png")
+            ppm += ".ppm"
+            save_ppm(screen, ppm)
+            #save_extension(screen, name)
         elif commands[x] == "quit":
             break

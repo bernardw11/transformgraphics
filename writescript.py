@@ -65,7 +65,6 @@ line
             f.write('line\n{0} 400 {1} {2} {3} {1}\n'.format(x1, z1, x1 + 5, 395))
             f.write('line\n{0} 100 {1} {2} {3} {1}\n'.format(x1, z1, x1 - 5, 105))
             f.write('line\n{0} 100 {1} {2} {3} {1}\n'.format(x1, z1, x1 + 5, 105))
-            print("bruh!!")
             z1 += 50
         x1 += 50
 

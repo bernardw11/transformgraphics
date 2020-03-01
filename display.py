@@ -64,7 +64,8 @@ def save_extension( screen, fname ):
 def display( screen ):
     ppm_name = 'pic.ppm'
     save_ppm_ascii( screen, ppm_name )
-    p = Popen( ['IMdisplay', ppm_name], stdin=PIPE, stdout = PIPE )
+    #i use windows so i gotta do IMdisplay. windows actually kinda sucks for this stuff.
     #p = Popen( ['IMdisplay', ppm_name], stdin=PIPE, stdout = PIPE )
+    p = Popen( ['display', ppm_name], stdin=PIPE, stdout = PIPE )
     p.communicate()
     remove(ppm_name)
